@@ -1,0 +1,31 @@
+{
+  "name": "advent-of-code-2020",
+  "version": "1.0.0",
+  "description": "Advent of code solutions for 2020, in various languages - but mostly Javascript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasBower/advent-of-code-2020.git"
+  },
+  "keywords": [
+    "advent-of-code"
+  ],
+  "author": "Tom Bower",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasBower/advent-of-code-2020/issues"
+  },
+  "homepage": "https://github.com/ThomasBower/advent-of-code-2020#readme",
+  "adventConfig": {
+    "year": "2020",
+    "nameTemplate": "day{{num}}.js",
+    "templateFile": "node_modules/advent-of-code/src/templates/day.js"
+  },
+  "dependencies": {
+    "advent-of-code": "^5.0.0",
+    "dotenv": "^8.2.0"
+  }
+}
