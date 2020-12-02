@@ -12,14 +12,14 @@ const part1 = data => {
     .map(n => parseInt(n));
 
   const seen = new Set();
-    for (const entry of entries) {
-        const addend = total - entry;
-        if (seen.has(addend)) {
-            return entry * addend;
-        }
-        seen.add(entry);
+  for (const entry of entries) {
+    const addend = total - entry;
+    if (seen.has(addend)) {
+      return entry * addend;
     }
-    return -1;
+    seen.add(entry);
+  }
+  return -1;
 }
 
 // Part 2
@@ -33,18 +33,18 @@ const part2 = data => {
     .map(n => parseInt(n)).sort((a, b) => a - b);
 
   for (let i = 0; i < entries.length - 2; i++) {
-      left = i + 1;
-      right = entries.length - 1;
-      while (left < right) {
-          const sum = entries[i] + entries[right] + entries[left];
-          if (sum === total) {
-              return entries[i] * entries[right] * entries[left];
-          } else if (sum < total) {
-              left++;
-          } else {
-              right--;
-          }
+    left = i + 1;
+    right = entries.length - 1;
+    while (left < right) {
+      const sum = entries[i] + entries[right] + entries[left];
+      if (sum === total) {
+        return entries[i] * entries[right] * entries[left];
+      } else if (sum < total) {
+        left++;
+      } else {
+        right--;
       }
+    }
   }
   return -1;
 }
