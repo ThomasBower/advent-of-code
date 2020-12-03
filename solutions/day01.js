@@ -2,11 +2,6 @@
 
 const total = 2020;
 
-// Part 1
-// ======
-// O(n) solution with just one pass over the
-// list of numbers.
-
 const part1 = data => {
   const entries = data.split('\n')
     .map(n => parseInt(n));
@@ -21,11 +16,6 @@ const part1 = data => {
   }
   return -1;
 }
-
-// Part 2
-// ======
-// O(n^2) solution using two pointers into
-// the sorted list of numbers.
 
 const part2 = data => {
   let left, right;
