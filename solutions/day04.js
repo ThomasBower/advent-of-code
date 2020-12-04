@@ -12,18 +12,18 @@ const validators = {
 
 const parse = input => 
   input.split('\n\n')
-    .map(entry => entry.match(new RegExp(`(${requiredFields.join('|')}):\\S*`, 'g'))
-    .map(match => match.split(':')));
+    .map(entry => entry
+      .match(new RegExp(`(${requiredFields.join('|')}):\\S*`, 'g'))
+      .map(match => match.split(':')))
+    .map(Object.fromEntries);
 
 const part1 = input =>
   parse(input).filter(entry =>
-    requiredFields.every(key => key in Object.fromEntries(entry))).length
+    requiredFields.every(key => key in entry)).length
 
-const part2 = input => {
-  return parse(input).filter(entry =>
-    requiredFields.every(key => key in Object.fromEntries(entry)
-    && validators[key](Object.fromEntries(entry)[key]))
+const part2 = input =>
+  parse(input).filter(entry =>
+    requiredFields.every(key => key in entry && validators[key](entry[key]))
   ).length
-}
 
 module.exports = { part1, part2 }
