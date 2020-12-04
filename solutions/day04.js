@@ -8,22 +8,19 @@ const validators = {
   hcl: v => /^#[a-f0-9]{6}$/.test(v),
   ecl: v => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(v),
   pid: v => /^\d{9}$/.test(v),
-}, requiredFields = Object.keys(validators);
+}, keys = Object.keys(validators);
 
 const parse = input => 
   input.split('\n\n')
     .map(entry => entry
-      .match(new RegExp(`(${requiredFields.join('|')}):\\S*`, 'g'))
+      .match(new RegExp(`(${keys.join('|')}):\\S*`, 'g'))
       .map(match => match.split(':')))
     .map(Object.fromEntries);
 
-const part1 = input =>
-  parse(input).filter(entry =>
-    requiredFields.every(key => key in entry)).length
+const part1 = input => parse(input).filter(entry =>
+  keys.every(key => key in entry)).length;
 
-const part2 = input =>
-  parse(input).filter(entry =>
-    requiredFields.every(key => key in entry && validators[key](entry[key]))
-  ).length
+const part2 = input => parse(input).filter(entry =>
+  keys.every(key => key in entry && validators[key](entry[key]))).length;
 
 module.exports = { part1, part2 }
