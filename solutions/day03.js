@@ -3,8 +3,8 @@
 const treesHit = (input, down, across) => {
   const rows = input.split('\n'), tree = '#';
   let treesHit = 0;
-  for (let x = 0, y = 0; x < rows.length; x += down, y += across) {
-    if (rows[x][y % rows[x].length] === tree) {
+  for (let y = 0, x = 0; y < rows.length; y += down, x += across) {
+    if (rows[y][x % rows[y].length] === tree) {
       treesHit++;
     }
   }
