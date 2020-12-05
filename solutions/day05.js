@@ -1,8 +1,7 @@
 'use strict'
 
 const seatIds = input => input.split('\n').map(row =>
-  parseInt(row.slice(0,7).replace(/F/g, '0').replace(/B/g, '1'), 2) * 8
-  + parseInt(row.slice(7).replace(/L/g, '0').replace(/R/g, '1'), 2));
+  parseInt(row.replace(/F|L/g, '0').replace(/B|R/g, '1'), 2));
 
 const part1 = input => Math.max(...seatIds(input))
 
