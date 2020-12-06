@@ -5,10 +5,9 @@ const seatIds = input => input.split('\n').map(row =>
 
 const part1 = input => Math.max(...seatIds(input))
 
-const part2 = input => seatIds(input)
-  .sort((a, b) => a - b)
-  .reduce((res, a, i, as) => 
-    !i || res !== undefined || as[i - 1] + 1 === a ? res : as[i - 1] + 1
-  , undefined);
+const part2 = input => {
+  const ids = seatIds(input);
+  return (Math.max(...ids) + Math.min(...ids)) * (ids.length + 1) / 2 - ids.reduce((a, b) => a + b);
+};
 
 module.exports = { part1, part2 }
