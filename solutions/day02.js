@@ -2,7 +2,8 @@
 
 const parse = input =>
   input.split('\n').map(line => {
-    const { groups } = /(?<i>\d+)-(?<j>\d+) (?<letter>\w): (?<password>\w+)/g.exec(line);
+    const { groups } = /(?<i>\d+)-(?<j>\d+) (?<letter>\w): (?<password>\w+)/g
+      .exec(line);
     return {
       ...groups,
       i: parseInt(groups.i),
@@ -11,14 +12,13 @@ const parse = input =>
   });
 
 const part1 = input =>
-  parse(input).reduce((valid, { i, j, letter, password }) => {
-    const actual = password.split(letter).length - 1;
-    return actual >= i && actual <= j ? valid + 1 : valid;
-  }, 0);
+  parse(input).reduce((valid, { i, j, letter, password }) => (actual =>
+    actual >= i && actual <= j ? valid + 1: valid)
+    (password.split(letter).length - 1), 0);
 
 const part2 = input => 
   parse(input).reduce((valid, { i, j, letter, password }) =>
-    ((password[i - 1] === letter) !== (password[j - 1] === letter)) ? valid + 1 : valid
-  , 0);
+    (password[i - 1] === letter) !== (password[j - 1] === letter)
+      ? valid + 1 : valid, 0);
 
 module.exports = { part1, part2 }

@@ -14,6 +14,6 @@ const treesHit = (input, down, across) => {
 const part1 = input => treesHit(input, 1, 3)
 
 const part2 = input => [[1, 1], [1, 3], [1, 5], [1, 7], [2, 1]]
-  .reduce((product, [down, across]) => product * treesHit(input, down, across), 1);
+  .reduce((product, [y, x]) => product * treesHit(input, y, x), 1);
 
 module.exports = { part1, part2 }
