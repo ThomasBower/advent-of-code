@@ -3,8 +3,7 @@
 const parse = input => input.split('\n').map(line => Number(line));
 const windowSize = 25;
 
-const part1 = input => {
-  const nums = parse(input);
+const findInvalid = nums => {
   for (let i = windowSize; i < nums.length; i++) {
     let sums = nums.slice(i - windowSize, i)
       .map((n1, j) => nums.slice(i - windowSize + j + 1, i)
@@ -16,9 +15,12 @@ const part1 = input => {
   return -1;
 }
 
+const part1 = input => findInvalid(parse(input));
+
 const part2 = input => {
-  const nums = parse(input), target = part1(input);
-  const sums = nums.reduce((p, c) => [...p, (p[p.length - 1] || 0) + c], [0]);
+  const nums = parse(input),
+        target = findInvalid(nums),
+        sums = nums.reduce((p, c) => [...p, (p[p.length - 1] || 0) + c], [0]);
   let left = 0, right = 0;
   while (right < sums.length && left < sums.length) {
     const sum = sums[right] - sums[left];
