@@ -18,18 +18,17 @@ const findInvalid = nums => {
 const part1 = input => findInvalid(parse(input));
 
 const part2 = input => {
-  const nums = parse(input),
-        target = findInvalid(nums),
-        sums = nums.reduce((p, c) => [...p, (p[p.length - 1] || 0) + c], [0]);
-  let left = 0, right = 0;
-  while (right < sums.length && left < sums.length) {
-    const sum = sums[right] - sums[left];
+  const nums = parse(input), target = findInvalid(nums);
+  let left = 0, right = 0, sum = nums[0];
+  while (right < nums.length && left < nums.length) {
     if (sum === target) {
       const range = nums.slice(left, right + 1);
       return Math.min(...range) + Math.max(...range);
     } else if (sum < target) {
       right++;
+      sum += nums[right];
     } else {
+      sum -= nums[left];
       left++;
     }
   }
