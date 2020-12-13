@@ -6,8 +6,8 @@ const parse = input => input.split('\n').map(line =>
 const move = ([y, x, direction], [action, value]) => {
   const bearings = { 'N': 0, 'E': 90, 'S': 180, 'W': 270 };
   switch(action) {
-    case 'N': return [y - value, x, direction];
-    case 'S': return [y + value, x, direction];
+    case 'N': return [y + value, x, direction];
+    case 'S': return [y - value, x, direction];
     case 'E': return [y, x + value, direction];
     case 'W': return [y, x - value, direction];
     case 'L': return [y, x,
