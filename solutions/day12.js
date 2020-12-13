@@ -12,25 +12,27 @@ const rotate = (wy, wx, value, dir) => [wy * rotations[dir][value][0][0]
   + wx * rotations[dir][value][0][1], wy * rotations[dir][value][1][0]
   + wx * rotations[dir][value][1][1]];
 
+const commonOperations = {
+  'L': ([y, x, wy, wx], value) => [y, x, ...rotate(wy, wx, value, 'L')],
+  'R': ([y, x, wy, wx], value) => [y, x, ...rotate(wy, wx, value, 'R')],
+  'F': ([y, x, wy, wx], value) => [y + (wy * value), x + (wx * value), wy, wx],
+};
+
 const operations1 = {
+  ...commonOperations,
   'N': ([y, x, wy, wx], value) => [y + value, x, wy, wx],
   'S': ([y, x, wy, wx], value) => [y - value, x, wy, wx],
   'E': ([y, x, wy, wx], value) => [y, x + value, wy, wx],
   'W': ([y, x, wy, wx], value) => [y, x - value, wy, wx],
-  'L': ([y, x, wy, wx], value) => [y, x, ...rotate(wy, wx, value, 'L')],
-  'R': ([y, x, wy, wx], value) => [y, x, ...rotate(wy, wx, value, 'R')],
-  'F': ([y, x, wy, wx], value) => [y + (wy * value), x + (wx * value), wy, wx],
-}
+};
 
 const operations2 = {
+  ...commonOperations,
   'N': ([y, x, wy, wx], value) => [y, x, wy + value, wx],
   'S': ([y, x, wy, wx], value) => [y, x, wy - value, wx],
   'E': ([y, x, wy, wx], value) => [y, x, wy, wx + value],
   'W': ([y, x, wy, wx], value) => [y, x, wy, wx - value],
-  'L': ([y, x, wy, wx], value) => [y, x, ...rotate(wy, wx, value, 'L')],
-  'R': ([y, x, wy, wx], value) => [y, x, ...rotate(wy, wx, value, 'R')],
-  'F': ([y, x, wy, wx], value) => [y + (wy * value), x + (wx * value), wy, wx],
-}
+};
 
 const run = (input, operations, state) => parse(input)
   .reduce((state, [operation, value]) => operations[operation](state, value), state)
