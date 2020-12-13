@@ -1,25 +1,33 @@
 'use strict'
 
-const empty = 'L', occupied = '#', floor = '.';
+const empty = 'L', occupied = '#';
 
 const parse = input => input.split('\n').map(row => row.split(''));
 
-const iterate = (seats, numTaken, immediateOnly) => seats.slice()
+const iterate = (seats, numTaken, immediateOnly) => seats
   .map((row, y) => row.map((seat, x) => {
     const taken = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0],
       [1, 1]].reduce((p, [dy, dx]) => {
         let dxP = dx, dyP = dy;
         while (x + dxP >= 0 && x + dxP < row.length
           && y + dyP >= 0 && y + dyP < seats.length) {
-          if (seats[y + dyP][x + dxP] === occupied) return p + 1;
-          if (seats[y + dyP][x + dxP] === empty || immediateOnly) break;
+          if (seats[y + dyP][x + dxP] === occupied) {
+            return p + 1;
+          }
+          if (seats[y + dyP][x + dxP] === empty || immediateOnly) {
+            break;
+          }
           dxP += dx;
           dyP += dy;
         }
         return p;
       }, 0);
-    if (taken === 0 && seat === empty) return occupied;
-    if (taken >= numTaken && seat === occupied) return empty;
+    if (taken === 0 && seat === empty) {
+      return occupied;
+    }
+    if (taken >= numTaken && seat === occupied) {
+      return empty;
+    }
     return seat;
   }));
 

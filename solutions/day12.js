@@ -1,11 +1,11 @@
 'use strict'
 
-const parse = input => input.split('\n').map(line =>
-  [line.slice(0, 1), Number(line.slice(1))]);
+const parse = input => input.split('\n').map(([operation, ...value]) =>
+  [operation, Number(value)]);
 
 const rotations = { 
+  L: { 90: [[0, 1], [-1, 0]], 180: [[-1, 0], [0, -1]], 270: [[0, -1], [1, 0]] },
   R: { 90: [[0, -1], [1, 0]], 180: [[-1, 0], [0, -1]], 270: [[0, 1], [-1, 0]] },
-  L: { 90: [[0, 1], [-1, 0]], 180: [[-1, 0], [0, -1]], 270: [[0, -1], [1, 0]] }
 };
 
 const rotate = (wy, wx, value, dir) => [wy * rotations[dir][value][0][0]
@@ -35,7 +35,7 @@ const operations2 = {
 };
 
 const run = (input, operations, state) => parse(input)
-  .reduce((state, [operation, value]) => operations[operation](state, value), state)
+  .reduce((state, [op, val]) => operations[op](state, val), state)
   .slice(0, 2).reduce((p, c) => p + Math.abs(c), 0);
 
 const part1 = input => run(input, operations1, [0, 0, 0, 1]);
