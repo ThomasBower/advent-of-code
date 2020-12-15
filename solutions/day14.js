@@ -34,7 +34,7 @@ const part2 = input => {
       .forEach(addr => memory[addr] = parseInt(rhs))
   );
 
-  return Number(Object.values(memory).reduce((a, b) => a + b));
+  return Object.values(memory).reduce((a, b) => a + b);
 }
 
 module.exports = { part1, part2 }
