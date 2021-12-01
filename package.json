@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/ThomasBower/advent-of-code-2020#readme",
   "adventConfig": {
-    "year": "2020",
-    "nameTemplate": "solutions/day{{num}}.js",
+    "year": "2021",
+    "nameTemplate": "2021/day{{num}}.js",
     "templateFile": "node_modules/advent-of-code/src/templates/day.js"
   },
   "dependencies": {
